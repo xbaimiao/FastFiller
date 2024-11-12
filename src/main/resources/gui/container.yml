@@ -1,0 +1,33 @@
+title: "&a创世容器"
+sort:
+  - 'CCACCCBCC'
+identifier:
+  add: 'A'
+  remove: 'B'
+items:
+  A:
+    material: lever
+    name: "&a&l添加物品"
+    custom: 20002
+    lore:
+      - '&a◎&7 往此创世斧里放入方块'
+      - '&a◎&7 物品可用于一键填充方块'
+      - ''
+      - '&a◎&e 使用方块点击此按钮即可添加'
+      - '&a◎&e Shift + 右击 可快速将背包同类方块放入'
+  B:
+    material: lever
+    name: '&c&l取出物品'
+    custom: 20003
+    lore:
+      - '&a◎&7 取出存放在创世斧里的方块'
+      - '&a◎&7 取出你可以重新放入'
+      - ''
+      - '&a◎&e 左击取出16个 右击取出64个'
+      - '&a◎&e Shift + 右击 可取出一背包'
+  C:
+    material: paper
+    name: ' '
+    custom: 20004
+    lore:
+      - ''

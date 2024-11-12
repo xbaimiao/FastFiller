@@ -1,0 +1,19 @@
+title: '&e操作确认'
+sort:
+  - '  A   B  '
+identifier:
+  confirm: 'A'
+  cancel: 'B'
+items:
+  A:
+    material: 'head:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2UxZGViYzczMjMxZjhlZDRiNjlkNWMzYWMxYjFmMThmMzY1NmE4OTg4ZTIzZjJlMWJkYmM0ZTg1ZjZkNDZhIn19fQ=='
+    name: "&a&l确认操作"
+    lore:
+      - ''
+      - '&a◎&e 点击确认当前操作'
+  B:
+    material: 'head:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjM3MWU0ZTFjZjZhMWEzNmZkYWUyNzEzN2ZkOWI4NzQ4ZTYxNjkyOTk5MjVmOWFmMmJlMzAxZTU0Mjk4YzczIn19fQ=='
+    name: "&a&l取消操作"
+    lore:
+      - ''
+      - '&a◎&e 点击取消当前操作'

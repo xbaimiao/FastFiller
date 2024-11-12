@@ -1,0 +1,44 @@
+title: '&a创世菜单'
+sort:
+  - ' A B C D '
+# 标识符 代表点击这个物品会打开哪个菜单
+identifier:
+  container: 'A'
+  clear: 'B'
+  water: 'C'
+  fill: 'D'
+items:
+  A:
+    material: stone
+    name: "&a&l容器操作"
+    custom: 20004
+    lore:
+      - '&a◎&7 往此创世斧里放入方块'
+      - '&a◎&7 取出创世斧里面的方块'
+      - ''
+      - '&a◎&e 点击打开'
+  B:
+    material: DIAMOND_PICKAXE
+    name: "&a&l清空方块"
+    lore:
+      - '&a◎&7 选好点后 &6点击 &7此按钮'
+      - '&a◎&7 将选点区域 &6清空'
+      - '&a◎&7 贵重物品和粘液科技不会被清理'
+      - ''
+      - '&a◎&6 点击 &7清空'
+  C:
+    material: BUCKET
+    name: "&a&l清除水源"
+    lore:
+      - '&a◎&7 选好点后 &6点击 &7此按钮'
+      - '&a◎&7 将选点区域的 §6水源清空'
+      - ''
+      - '&a◎&6 点击 &7清空'
+  D:
+    material: SAND
+    name: "&a&l方块填充"
+    lore:
+      - '&a◎&7 选好点后 &6点击 &7此按钮'
+      - '&a◎&7 将使用创世斧 &6容器里的方块 &7填充选点区域'
+      - ''
+      - '&a◎&6 点击 &7填充'

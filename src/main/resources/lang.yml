@@ -1,0 +1,31 @@
+giveItem: "创世斧已放入玩家{0}背包"
+addItem-noItem: "&a请先点击物品在点击此按钮"
+addItem-notFiller: "&c请将创世斧拿在主手"
+addItem-success: "&a已将你背包的同类物品全部放入此容器"
+addItem-noType: "&c该方块类型不可放入此容器"
+addItem-typeAtypism: "&c请放入相同类型的方块"
+addItem-hasLore: "&a请放入普通方块"
+removeItem-noItem: "&c容器里面已经没有方块了,你可以放入其他方块了"
+removeItem-hasItem: "&c请先将你手上的方块放下在点击"
+select-loc1: "&a成功选择了第一个点x:{0} y:{1} z:{2}"
+select-loc2: "&a成功选择了第二个点x:{0} y:{1} z:{2}"
+select-noSelect: "&c请先选择两点"
+select-res-not-player: "&c你只能在自己的领地 或者拥有ADMIN权限的领地 中使用此工具"
+select-ps-not-player: '你只能在自己的地皮中使用此工具'
+select-bentobox-not-player: '你只能在你自己的岛屿中使用'
+select-res-dissimilarity: "&c请确保两点都在同一个领地或地皮"
+select-not-enable-world: '你不能在这个世界使用'
+fill-clear: "&a正在清除该范围内的方块"
+filler: "&a正在使用{0}填充选点区域"
+filler-magicblock: "&a已检测到你拿着魔术方块,本次填充不消耗材料"
+filler-infill: "&c请等待上一个区域操作完成 或者两分钟后 你才可以进行下一步操作"
+fill-noItem: "&c你的容器里面已经没有方块了"
+confirm-cancel: "&c你取消了操作"
+no-permission: "&c你没有权限使用"
+filler-magic-no-permission: "&c已检测到你拿上了无限方块,但你没有权限使用"
+filler-noItem: '你手上的物品不是创世斧'
+addItem-isAIR: '内部目前是空气 无法一键添加背包同类到斧子'
+not-found-kind-item: '未找到同类物品'
+filler-tooLarge: '你选择的区域过大 请缩小范围'
+filler-magic-no-amount: '不能使用有数量的魔术方块'
+filler-cooldown: '你还需要等待{0}秒才能使用'

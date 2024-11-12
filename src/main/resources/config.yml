@@ -1,0 +1,66 @@
+# 授权网易服-生存领域使用
+# 授权网易服-生存领域使用
+# 授权网易服-生存领域使用
+# 授权网易服-生存领域使用
+# 授权网易服-生存领域使用
+
+# 基础使用权限  playerfiller.use
+# 使用魔术方块填充的权限 playerfiller.magic
+# 不限制最大清理范围和冷却的权限 playerfiller.vip
+enable-worlds:
+  - 'world'
+item:
+  material: iron_axe
+  name: "&8<&6*&5创世级&8> &7创世斧"
+  custom: 20001
+  lore:
+    - '&f功能:'
+    - '&a◎&7 一键清除选点范围方块'
+    - '&a◎&7 一键清除选点范围水源'
+    - ''
+    - '&a◎&7 一键填充选点范围为指定方块'
+    - '&a◎&7 如果你有魔术方块 你可将他放入副手 这样将不会消耗容器的方块'
+    - ''
+    - '&a◎&6 下蹲 + 右击 &7打开建造菜单'
+    - '&f容器: %item% X %amount%'
+# 最大可清理范围
+maxRange: '500x500'
+# 使用冷却 单位秒
+cooldown: 120
+
+# 可以被清理的方块
+whiteListBlock:
+  - STONE
+  - REDSTONE_ORE
+  - IRON_ORE
+  - DIAMOND_ORE
+  - GOLD_ORE
+  - COPPER_ORE
+  - GRASS_BLOCK
+  - GRASS
+  - COAL_ORE
+  - DIRT
+  - GRAVEL
+  - ANDESITE
+  - LAPIS_ORE
+  - DIORITE
+  - GRANITE
+  - COBBLESTONE
+# 可放入容器的方块
+containerBlock:
+  - STONE
+  - REDSTONE_ORE
+  - IRON_ORE
+  - DIAMOND_ORE
+  - GOLD_ORE
+  - COPPER_ORE
+  - GRASS_BLOCK
+  - GRASS
+  - COAL_ORE
+  - DIRT
+  - GRAVEL
+  - ANDESITE
+  - LAPIS_ORE
+  - DIORITE
+  - GRANITE
+  - COBBLESTONE
