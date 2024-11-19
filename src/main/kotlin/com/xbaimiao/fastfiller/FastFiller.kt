@@ -6,9 +6,9 @@ import com.xbaimiao.easylib.util.ShortUUID
 import com.xbaimiao.easylib.util.plugin
 import com.xbaimiao.fastfiller.api.PlayerFillerAPI
 import com.xbaimiao.fastfiller.api.impl.DefaultPlayerFillerAPI
-import com.xbaimiao.fastfiller.core.Hook
 import com.xbaimiao.fastfiller.core.data.DataContainer
 import com.xbaimiao.fastfiller.core.data.MemoryDataContainer
+import com.xbaimiao.fastfiller.core.hook.Hook
 import com.xbaimiao.fastfiller.core.workload.WorkLoadPool
 import com.xbaimiao.fastfiller.ui.FillerUIManager
 

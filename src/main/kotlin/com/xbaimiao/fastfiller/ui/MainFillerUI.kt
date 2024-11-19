@@ -8,12 +8,12 @@ import com.xbaimiao.fastfiller.api.impl.DefaultContainer
 import com.xbaimiao.fastfiller.config.Config
 import com.xbaimiao.fastfiller.core.BlockCompare
 import com.xbaimiao.fastfiller.core.CoolDown
-import com.xbaimiao.fastfiller.core.Hook
 import com.xbaimiao.fastfiller.core.fill.ClearBlocks
 import com.xbaimiao.fastfiller.core.fill.FillBlocks
 import com.xbaimiao.fastfiller.core.fill.MagicFillBlocks
+import com.xbaimiao.fastfiller.core.hook.Hook
+import com.xbaimiao.fastfiller.core.hook.adaptPlotSquared
 import com.xbaimiao.fastfiller.listener.InteractEvent
-import com.xbaimiao.fastfiller.listener.InteractEvent.adaptPlotSquared
 import landMain.LandMain
 import org.bukkit.Location
 import org.bukkit.Material

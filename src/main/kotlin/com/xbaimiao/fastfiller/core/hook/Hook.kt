@@ -1,4 +1,4 @@
-package com.xbaimiao.fastfiller.core
+package com.xbaimiao.fastfiller.core.hook
 
 import com.bekvon.bukkit.residence.Residence
 import com.xbaimiao.easylib.util.info

@@ -1,7 +1,7 @@
 package com.xbaimiao.fastfiller.core.workload
 
 import com.xbaimiao.fastfiller.api.filltask.Workload
-import com.xbaimiao.fastfiller.core.Hook
+import com.xbaimiao.fastfiller.core.hook.Hook
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import pku.yim.magicblock.MagicBlock
