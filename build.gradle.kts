@@ -17,6 +17,7 @@ easylib {
         mainClassName = "com.xbaimiao.fastfiller.FastFiller"
         pluginName = "PlayerFiller"
         kotlinVersion = ktVersion
+        pluginUpdateInfo = "支持1.21.1"
     }
     version = easylibVersion
 
