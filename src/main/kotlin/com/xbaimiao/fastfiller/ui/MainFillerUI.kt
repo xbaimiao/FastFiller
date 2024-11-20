@@ -151,7 +151,7 @@ class MainFillerUI(
         if (Hook.hasResidence) {
             val res1 = Hook.residence!!.residenceManager.getByLoc(location1)
             val res2 = Hook.residence!!.residenceManager.getByLoc(location2)
-            if (res1.name != res2.name) {
+            if (res1 != null && res2 != null && res1.name != res2.name) {
                 player.sendLang("select-res-dissimilarity")
                 return null
             }
