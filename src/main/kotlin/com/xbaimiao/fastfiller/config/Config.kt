@@ -18,11 +18,11 @@ object Config {
         val list = ArrayList<Material>()
         for (it in FastFiller.conf.getStringList("whiteListBlock")) {
             if (it.equals("ALL", ignoreCase = true)) {
-                return@lazy Material.values().toList()
+                return@lazy Material.entries
             }
             if (it.endsWith("*")) {
                 val math = it.substring(0, it.length - 1)
-                list.addAll(Material.values().filter { it.name.contains(math) })
+                list.addAll(Material.entries.filter { it.name.contains(math) })
             } else {
                 list.add(XMaterial.matchXMaterial(it).get().parseMaterial()!!)
             }
@@ -30,10 +30,21 @@ object Config {
         list
     }
 
-    val containerBlock
-        get() =
-            FastFiller.conf.getStringList("containerBlock")
-                .map { XMaterial.matchXMaterial(it).get().parseMaterial()!! }
+    val containerBlock by lazy {
+        val list = ArrayList<Material>()
+        for (it in FastFiller.conf.getStringList("containerBlock")) {
+            if (it.equals("ALL", ignoreCase = true)) {
+                return@lazy Material.entries.filter { material -> material.isBlock }
+            }
+            if (it.endsWith("*")) {
+                val math = it.substring(0, it.length - 1)
+                list.addAll(Material.entries.filter { it.name.contains(math) })
+            } else {
+                list.add(XMaterial.matchXMaterial(it).get().parseMaterial()!!)
+            }
+        }
+        list
+    }
 
     private val displaySection = FastFiller.conf.getConfigurationSection("item")!!
 
