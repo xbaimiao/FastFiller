@@ -1,5 +1,6 @@
 package com.xbaimiao.fastfiller.core.hook
 
+import com.xbaimiao.fastfiller.Config
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
@@ -10,7 +11,7 @@ import org.bukkit.entity.Player
  * @return 有权限和自己领地 返回 true 否则 false 如果不在领地内也返回false
  */
 fun checkRes(player: Player, location: Location): Boolean {
-    if (!Hook.hasResidence) {
+    if (!Hook.hasResidence || !Config.checkResidence) {
         return true
     }
     val manager = Hook.residence!!.residenceManager

@@ -28,6 +28,15 @@ maxRange: '500x500'
 # 使用冷却 单位秒
 cooldown: 120
 
+# 是否检测选点在领地内
+checkResidence: true
+# 是否检测Land插件
+checkLand: true
+# 是否检测PlotSquared
+checkPlotSquared: true
+# 是否检测BentoBox
+checkBentoBox: true
+
 # 可以被清理的方块
 whiteListBlock:
   - STONE

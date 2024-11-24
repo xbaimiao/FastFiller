@@ -1,18 +1,28 @@
-package com.xbaimiao.fastfiller.config
+package com.xbaimiao.fastfiller
 
 import com.xbaimiao.easylib.chat.colored
 import com.xbaimiao.easylib.util.buildItem
 import com.xbaimiao.easylib.xseries.XMaterial
-import com.xbaimiao.fastfiller.FastFiller
 import org.bukkit.Material
 
 object Config {
+
+    private val displaySection = FastFiller.conf.getConfigurationSection("item")!!
+    private val displayName = displaySection.getString("name")!!.colored()
+    private val displayModel = displaySection.getInt("custom", 20001)
+
+    val checkResidence = FastFiller.conf.getBoolean("checkResidence", true)
+    val checkLand = FastFiller.conf.getBoolean("checkLand", true)
+    val checkPlotSquared = FastFiller.conf.getBoolean("checkPlotSquared", true)
+    val checkBentoBox = FastFiller.conf.getBoolean("checkBentoBox", true)
+
+    val enableWorlds get() = FastFiller.conf.getStringList("enable-worlds")
+    val stationaryWater by lazy { runCatching { Material.valueOf("STATIONARY_WATER") }.getOrNull() }
 
     val maxRange = FastFiller.conf.getString("maxRange", "500x500")!!.split("x").let {
         it[0].toInt() to it[1].toInt()
     }
 
-    val enableWorlds get() = FastFiller.conf.getStringList("enable-worlds")
 
     val whiteListBlock by lazy {
         val list = ArrayList<Material>()
@@ -45,12 +55,7 @@ object Config {
         }
         list
     }
-
-    private val displaySection = FastFiller.conf.getConfigurationSection("item")!!
-
-    private val displayName = displaySection.getString("name")!!.colored()
     val displayLore = displaySection.getStringList("lore").colored()
-    private val displayModel = displaySection.getInt("custom", 20001)
 
     val defaultItem by lazy {
         displaySection.let {

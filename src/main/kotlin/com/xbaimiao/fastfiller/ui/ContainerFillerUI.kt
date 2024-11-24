@@ -7,7 +7,7 @@ import com.xbaimiao.easylib.util.giveItem
 import com.xbaimiao.easylib.util.isAir
 import com.xbaimiao.fastfiller.FastFiller
 import com.xbaimiao.fastfiller.InventoryUtil.getInventoryVolume
-import com.xbaimiao.fastfiller.config.Config
+import com.xbaimiao.fastfiller.Config
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player

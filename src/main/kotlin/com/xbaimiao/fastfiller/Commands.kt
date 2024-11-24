@@ -3,7 +3,7 @@ package com.xbaimiao.fastfiller
 import com.xbaimiao.easylib.chat.Lang.sendLang
 import com.xbaimiao.easylib.command.command
 import com.xbaimiao.easylib.util.giveItem
-import com.xbaimiao.fastfiller.config.Config
+import com.xbaimiao.fastfiller.Config
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 

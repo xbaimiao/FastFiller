@@ -1,6 +1,7 @@
 package com.xbaimiao.fastfiller.core.hook
 
 import com.plotsquared.core.PlotSquared
+import com.xbaimiao.fastfiller.Config
 import org.bukkit.Location
 import org.bukkit.entity.Player
 
@@ -15,7 +16,7 @@ val Location.adaptPlotSquared: com.plotsquared.core.location.Location
     }
 
 fun checkPlotSquared(player: Player, location: Location): Boolean {
-    if (!Hook.hasPlotSquared) {
+    if (!Hook.hasPlotSquared || !Config.checkPlotSquared) {
         return true
     }
     val plot = location.adaptPlotSquared.plot ?: return true

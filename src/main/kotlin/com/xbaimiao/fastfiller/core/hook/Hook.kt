@@ -20,9 +20,6 @@ object Hook {
         if (Bukkit.getPluginManager().getPlugin("BentoBox") != null) {
             hasBentoBox = true
         }
-        if (Bukkit.getPluginManager().getPlugin("PlotSquared") != null) {
-            hasPlotSquared = true
-        }
         if (Bukkit.getPluginManager().getPlugin("land") != null) {
             hasLand = true
         }

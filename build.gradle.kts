@@ -9,15 +9,14 @@ plugins {
 }
 
 group = "com.xbaimiao.fastfiller"
-
-version = "1.0.3"
+version = "1.0.4"
 
 easylib {
     env {
         mainClassName = "com.xbaimiao.fastfiller.FastFiller"
         pluginName = "PlayerFiller"
         kotlinVersion = ktVersion
-        pluginUpdateInfo = "支持1.21.1"
+        pluginUpdateInfo = "增加检测开关和优化使用体验"
     }
     version = easylibVersion
 

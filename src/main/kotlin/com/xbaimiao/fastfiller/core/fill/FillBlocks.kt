@@ -1,8 +1,9 @@
 package com.xbaimiao.fastfiller.core.fill
 
+import com.xbaimiao.fastfiller.Config
 import com.xbaimiao.fastfiller.FastFiller
-import com.xbaimiao.fastfiller.api.filltask.VolumeFiller
 import com.xbaimiao.fastfiller.api.Container
+import com.xbaimiao.fastfiller.api.filltask.VolumeFiller
 import com.xbaimiao.fastfiller.core.BlockCompare
 import com.xbaimiao.fastfiller.core.workload.PlaceBlock
 import org.bukkit.Location
@@ -15,7 +16,7 @@ import org.bukkit.entity.Player
  * @description:
  */
 class FillBlocks(
-    private val pair: Pair<Material, Int>,
+    private val materialAndAmount: Pair<Material, Int>,
     private val container: Container,
     private val player: Player
 ) : VolumeFiller {
@@ -31,19 +32,21 @@ class FillBlocks(
         a@ for (x in box.minX..box.maxX) {
             for (y in box.minY..box.maxY) {
                 for (z in box.minZ..box.maxZ) {
-                    if (world.getBlockAt(x, y, z).type != Material.AIR) {
+                    val block = world.getBlockAt(x, y, z)
+
+                    if (block.type !in listOfNotNull(Material.AIR, Material.WATER, Config.stationaryWater)) {
                         continue
                     }
                     num++
-                    if (num >= pair.second) {
+                    if (num >= materialAndAmount.second) {
                         break@a
                     }
-                    val placeBlock = PlaceBlock(world.uid, x, y, z, pair.first)
+                    val placeBlock = PlaceBlock(world.uid, x, y, z, materialAndAmount.first)
                     workloadRunnable.addWorkload(placeBlock)
                 }
             }
         }
-        container.subtractItem(pair.first, num)
+        container.subtractItem(materialAndAmount.first, num)
         FastFiller.dataContainer.setInFill(player, false)
     }
 

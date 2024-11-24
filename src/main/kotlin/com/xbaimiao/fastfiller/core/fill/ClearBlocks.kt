@@ -6,6 +6,7 @@ import com.xbaimiao.fastfiller.core.BlockCompare
 import com.xbaimiao.fastfiller.core.workload.PlaceBlock
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.Container
 import org.bukkit.entity.Player
 
 /**
@@ -27,7 +28,8 @@ class ClearBlocks(private val whiteList: List<Material>, private val player: Pla
         for (x in box.minX..box.maxX) {
             for (y in box.minY..box.maxY) {
                 for (z in box.minZ..box.maxZ) {
-                    if (world.getBlockAt(x, y, z).type !in whiteList) {
+                    val block = world.getBlockAt(x, y, z)
+                    if (block.state is Container || block.type !in whiteList) {
                         continue
                     }
                     val placeBlock = PlaceBlock(world.uid, x, y, z, material)

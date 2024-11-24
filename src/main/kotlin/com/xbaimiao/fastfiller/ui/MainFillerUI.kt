@@ -3,9 +3,9 @@ package com.xbaimiao.fastfiller.ui
 import com.xbaimiao.easylib.chat.Lang.sendLang
 import com.xbaimiao.easylib.ui.Basic
 import com.xbaimiao.easylib.util.submit
+import com.xbaimiao.fastfiller.Config
 import com.xbaimiao.fastfiller.FastFiller
 import com.xbaimiao.fastfiller.api.impl.DefaultContainer
-import com.xbaimiao.fastfiller.config.Config
 import com.xbaimiao.fastfiller.core.BlockCompare
 import com.xbaimiao.fastfiller.core.CoolDown
 import com.xbaimiao.fastfiller.core.fill.ClearBlocks
@@ -54,7 +54,7 @@ class MainFillerUI(
                 }
                 clear(
                     player,
-                    listOfNotNull(Material.WATER, runCatching { Material.valueOf("STATIONARY_WATER") }.getOrNull())
+                    listOfNotNull(Material.WATER, Config.stationaryWater)
                 )
             }
         }
@@ -148,15 +148,15 @@ class MainFillerUI(
                 player.sendLang("select-noSelect")
                 null
             }
-        if (Hook.hasResidence) {
+        if (Hook.hasResidence && Config.checkResidence) {
             val res1 = Hook.residence!!.residenceManager.getByLoc(location1)
             val res2 = Hook.residence!!.residenceManager.getByLoc(location2)
-            if (res1 != null && res2 != null && res1.name != res2.name) {
+            if (res1?.name != res2?.name) {
                 player.sendLang("select-res-dissimilarity")
                 return null
             }
         }
-        if (Hook.hasPlotSquared) {
+        if (Hook.hasPlotSquared && Config.checkPlotSquared) {
             val plot1 = location1.adaptPlotSquared.plot
             val plot2 = location2.adaptPlotSquared.plot
             if (plot1 != null || plot2 != null) {
@@ -166,7 +166,7 @@ class MainFillerUI(
                 }
             }
         }
-        if (Hook.hasBentoBox) {
+        if (Hook.hasBentoBox && Config.checkBentoBox) {
             val island1 = BentoBox.getInstance().islandsManager.getIslandAt(location1)
             val island2 = BentoBox.getInstance().islandsManager.getIslandAt(location2)
             if (island1.isPresent || island2.isPresent) {
@@ -176,7 +176,7 @@ class MainFillerUI(
                 }
             }
         }
-        if (Hook.hasLand) {
+        if (Hook.hasLand && Config.checkLand) {
             val land1 = LandMain.getLandManager().getHighestPriorityLand(location1)
             val land2 = LandMain.getLandManager().getHighestPriorityLand(location2)
             if (land1 != null || land2 != null) {

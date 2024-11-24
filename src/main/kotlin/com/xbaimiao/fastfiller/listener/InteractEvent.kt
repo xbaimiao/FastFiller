@@ -5,7 +5,7 @@ import com.xbaimiao.easylib.util.EListener
 import com.xbaimiao.easylib.util.isAir
 import com.xbaimiao.easylib.util.submit
 import com.xbaimiao.fastfiller.FastFiller
-import com.xbaimiao.fastfiller.config.Config
+import com.xbaimiao.fastfiller.Config
 import com.xbaimiao.fastfiller.core.hook.*
 import com.xbaimiao.fastfiller.ui.FillerUIManager
 import org.bukkit.Location

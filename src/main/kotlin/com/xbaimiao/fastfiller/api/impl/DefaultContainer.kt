@@ -4,7 +4,7 @@ import com.xbaimiao.easylib.chat.Lang.sendLang
 import com.xbaimiao.easylib.util.modifyMeta
 import com.xbaimiao.fastfiller.FastFiller
 import com.xbaimiao.fastfiller.api.Container
-import com.xbaimiao.fastfiller.config.Config
+import com.xbaimiao.fastfiller.Config
 import de.tr7zw.changeme.nbtapi.NBTItem
 import org.bukkit.Material
 import org.bukkit.entity.Player
