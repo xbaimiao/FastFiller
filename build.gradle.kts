@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.xbaimiao.fastfiller"
-version = "1.0.4"
+version = "1.0.5"
 
 easylib {
     env {
@@ -20,7 +20,7 @@ easylib {
     }
     version = easylibVersion
 
-    library("de.tr7zw:item-nbt-api:2.13.2", false){
+    library("de.tr7zw:item-nbt-api:2.15.0", false){
         relocate("de.tr7zw.changeme.nbtapi", "${project.group}.shadow.itemnbtapi")
         repo("https://repo.codemc.org/repository/maven-public/")
     }
