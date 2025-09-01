@@ -2,6 +2,7 @@ package com.xbaimiao.fastfiller.listener
 
 import com.xbaimiao.easylib.chat.Lang.sendLang
 import com.xbaimiao.easylib.util.EListener
+import com.xbaimiao.easylib.util.infrequentOperation
 import com.xbaimiao.easylib.util.isAir
 import com.xbaimiao.easylib.util.submit
 import com.xbaimiao.fastfiller.FastFiller
@@ -33,7 +34,9 @@ object InteractEvent : Listener {
         event.isCancelled = true
         val player = event.player
         if (!player.hasPermission("playerfiller.use")) {
-            player.sendLang("no-permission")
+            player.infrequentOperation("no-permission") {
+                player.sendLang("no-permission")
+            }
             return
         }
         // 限制时间

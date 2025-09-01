@@ -36,7 +36,7 @@ object Commands {
                         return@exec
                     }
 
-                    val amount = amountArg.value().toInt()
+                    val amount = amountArg.value()?.toInt() ?: return@exec error("数量错误")
                     fillerItem.getContainer().addItem(old.first, amount)
                     sender.sendMessage("§a添加成功: $amount")
                 }
