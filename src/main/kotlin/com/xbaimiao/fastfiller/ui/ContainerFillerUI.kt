@@ -79,11 +79,9 @@ class ContainerFillerUI(override val section: ConfigurationSection) : FillerUI()
                 ClickType.SHIFT_RIGHT -> {
                     val amount = player.getInventoryVolume()
                     if (items.second <= amount) {
-                        for (a in 1..(items.second / 64)) {
-                            player.giveItem(buildItem(ItemStack(items.first)) {
-                                this.amount = 64
-                            })
-                        }
+                        player.giveItem(buildItem(ItemStack(items.first)) {
+                            this.amount = items.second
+                        })
                         container.setItem(Material.AIR, 0)
                     } else {
                         for (a in 1..(amount / 64)) {
