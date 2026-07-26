@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 val ktVersion: String by project
 val easylibVersion: String by project
+val craftEngineVersion: String by project
 
 plugins {
     java
@@ -30,6 +33,7 @@ easylib {
         softDepend.add("BentoBox")
         softDepend.add("land")
         softDepend.add("MagicBlock")
+        softDepend.add("CraftEngine")
     }
     version = easylibVersion
 
@@ -43,8 +47,16 @@ easylib {
     relocate("kotlinx", "$basePackage.shadow.kotlinx", true)
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 kotlin {
     jvmToolchain(17)
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+    }
 }
 
 repositories {
@@ -52,6 +64,8 @@ repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://repo.papermc.io/repository/maven-public/")
+    // CraftEngine
+    maven("https://repo.momirealms.net/releases")
 }
 
 dependencies {
@@ -59,6 +73,8 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     compileOnly("org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT")
     compileOnly("public:res:1.0.0")
+    compileOnly("net.momirealms:craft-engine-core:$craftEngineVersion")
+    compileOnly("net.momirealms:craft-engine-bukkit:$craftEngineVersion")
     compileOnly(fileTree("libs"))
 }
 
