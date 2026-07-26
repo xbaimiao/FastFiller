@@ -16,6 +16,11 @@ identifier:
   # 填充方块
   fill: 'D'
 
+# material 支持三种写法:
+#   STONE              原版材质
+#   head:<base64>      自定义头颅
+#   ce:<命名空间:物品id> CraftEngine 物品, 例如 ce:jzy:menu_icon
+# 使用 CraftEngine 物品时, name / lore / custom-model-data 留空即可保留 CE 物品自带的外观
 items:
   A:
     material: STONE

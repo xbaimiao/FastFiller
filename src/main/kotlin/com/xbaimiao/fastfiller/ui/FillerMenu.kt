@@ -3,10 +3,8 @@ package com.xbaimiao.fastfiller.ui
 import com.xbaimiao.easylib.chat.colored
 import com.xbaimiao.easylib.ui.Basic
 import com.xbaimiao.easylib.ui.SpigotBasic
-import com.xbaimiao.easylib.util.ItemBuilder
-import com.xbaimiao.easylib.util.buildItem
 import com.xbaimiao.easylib.util.warn
-import com.xbaimiao.easylib.xseries.XMaterial
+import com.xbaimiao.fastfiller.core.item.ItemFactory
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -35,11 +33,18 @@ abstract class FillerMenu(
             listOf("         ")
         }
 
+    /**
+     * 菜单物品
+     *
+     * 懒加载: CraftEngine 的物品表在 onEnable 阶段还是空的,
+     * 延迟到玩家第一次开菜单时构建才能拿到 CE 物品
+     */
     private val items: Map<Char, ItemStack> by lazy {
         val itemSection = section.getConfigurationSection("items") ?: return@lazy emptyMap()
         itemSection.getKeys(false).mapNotNull { key ->
             val child = itemSection.getConfigurationSection(key) ?: return@mapNotNull null
-            key.firstOrNull()?.let { it to buildConfigItem(child) }
+            val spec = ItemFactory.readSpec(child)
+            key.firstOrNull()?.let { it to ItemFactory.build(spec, "$menuName 的 items.$key") }
         }.toMap()
     }
 
@@ -70,33 +75,6 @@ abstract class FillerMenu(
             return def
         }
         return value[0]
-    }
-
-    private fun buildConfigItem(section: ConfigurationSection): ItemStack {
-        val material = section.getString("material") ?: "STONE"
-        // head:<base64> 形式的自定义头颅
-        if (material.startsWith("head:", ignoreCase = true)) {
-            return buildItem(XMaterial.PLAYER_HEAD) {
-                applyCommon(section)
-                skullTexture = ItemBuilder.SkullTexture(material.substring(5))
-            }
-        }
-        val xMaterial = XMaterial.matchXMaterial(material).orElse(null)
-        if (xMaterial == null) {
-            warn("菜单 $menuName 中的材质 $material 无效, 已使用 STONE 代替")
-            return buildItem(XMaterial.STONE) { applyCommon(section) }
-        }
-        return buildItem(xMaterial) { applyCommon(section) }
-    }
-
-    private fun ItemBuilder.applyCommon(section: ConfigurationSection) {
-        name = section.getString("name").colored()
-        customModelData = if (section.isSet("custom-model-data")) {
-            section.getInt("custom-model-data", -1)
-        } else {
-            section.getInt("custom", -1)
-        }
-        lore.addAll(section.getStringList("lore").colored())
     }
 
 }

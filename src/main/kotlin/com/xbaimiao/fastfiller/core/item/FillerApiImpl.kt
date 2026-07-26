@@ -1,6 +1,5 @@
 package com.xbaimiao.fastfiller.core.item
 
-import com.xbaimiao.easylib.util.buildItem
 import com.xbaimiao.easylib.util.isAir
 import com.xbaimiao.fastfiller.api.FillerApi
 import com.xbaimiao.fastfiller.api.FillerItem
@@ -46,11 +45,7 @@ internal class FillerApiImpl : FillerApi {
     }
 
     override fun createFillerItem(): ItemStack {
-        val itemStack = buildItem(FillerConfig.itemMaterial) {
-            name = FillerConfig.itemName
-            customModelData = FillerConfig.itemCustomModelData
-            lore.addAll(FillerConfig.itemLore)
-        }
+        val itemStack = ItemFactory.build(FillerConfig.itemSpec, "config.yml 的 item")
         markAsFillerItem(itemStack)
         // 写一次容器数据, 让 lore 上的容器行显示为空
         FillerItemImpl(itemStack).refreshLore()

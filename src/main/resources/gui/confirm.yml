@@ -12,6 +12,11 @@ identifier:
   # 取消
   cancel: 'B'
 
+# material 支持三种写法:
+#   STONE              原版材质
+#   head:<base64>      自定义头颅
+#   ce:<命名空间:物品id> CraftEngine 物品, 例如 ce:jzy:menu_icon
+# 使用 CraftEngine 物品时, name / lore / custom-model-data 留空即可保留 CE 物品自带的外观
 items:
   A:
     material: 'head:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2UxZGViYzczMjMxZjhlZDRiNjlkNWMzYWMxYjFmMThmMzY1NmE4OTg4ZTIzZjJlMWJkYmM0ZTg1ZjZkNDZhIn19fQ=='

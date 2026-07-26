@@ -9,6 +9,7 @@ import com.xbaimiao.easylib.util.isNotAir
 import com.xbaimiao.fastfiller.FastFiller
 import com.xbaimiao.fastfiller.api.FillerItem
 import com.xbaimiao.fastfiller.core.config.FillerConfig
+import com.xbaimiao.fastfiller.core.hook.CraftEngineHook
 import com.xbaimiao.fastfiller.core.item.PlainBlocks
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
@@ -126,6 +127,11 @@ class ContainerMenu(section: ConfigurationSection) : FillerMenu(section, "gui/co
             player.sendLang("addItem-noItem")
             return
         }
+        // 容器只按材质记录方块, CraftEngine 物品放进去会丢掉自定义数据
+        if (CraftEngineHook.isCustomItem(cursor)) {
+            player.sendLang("addItem-customItem")
+            return
+        }
         if (cursor.type !in FillerConfig.storableBlocks || !PlainBlocks.isPlainBlock(cursor)) {
             player.sendLang("addItem-noType")
             return
@@ -167,7 +173,10 @@ class ContainerMenu(section: ConfigurationSection) : FillerMenu(section, "gui/co
                 room += stackSize
                 continue
             }
-            if (item.type == material && PlainBlocks.isPlainBlock(item)) {
+            if (item.type == material
+                && PlainBlocks.isPlainBlock(item)
+                && !CraftEngineHook.isCustomItem(item)
+            ) {
                 room += (stackSize - item.amount).coerceAtLeast(0)
             }
         }

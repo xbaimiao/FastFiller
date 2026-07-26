@@ -5,6 +5,7 @@ import com.xbaimiao.fastfiller.api.FillerStorage
 import com.xbaimiao.fastfiller.api.StoredBlock
 import com.xbaimiao.fastfiller.core.config.BlockNames
 import com.xbaimiao.fastfiller.core.config.FillerConfig
+import com.xbaimiao.fastfiller.core.hook.CraftEngineHook
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -58,9 +59,14 @@ internal class FillerItemImpl(
     }
 
     private fun applyLore(meta: ItemMeta, stored: StoredBlock) {
+        val template = FillerConfig.itemLore
+        // 配置里没写 lore 时不动物品自带的 lore, 便于 CraftEngine 物品保留自己的描述
+        if (template.isEmpty()) {
+            return
+        }
         val blockName = if (stored.isEmpty) BlockNames.emptyName else BlockNames.of(stored.material)
         val amount = if (stored.isEmpty) 0 else stored.amount
-        meta.lore = FillerConfig.itemLore.map {
+        meta.lore = template.map {
             it.replace("%item%", blockName).replace("%amount%", amount.toString())
         }
     }
@@ -134,7 +140,11 @@ internal class FillerItemImpl(
                     break
                 }
                 val item = inventory.getItem(index) ?: continue
-                if (item.type != material || !PlainBlocks.isPlainBlock(item)) {
+                // 跳过 CraftEngine 物品, 它们的基础材质可能和容器里的一样
+                if (item.type != material
+                    || !PlainBlocks.isPlainBlock(item)
+                    || CraftEngineHook.isCustomItem(item)
+                ) {
                     continue
                 }
                 val room = roomFor(current.amount + collected)

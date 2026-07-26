@@ -22,6 +22,7 @@ internal object Hooks {
         register("PlotSquared", FillerConfig.checkPlotSquared) { PlotSquaredProtection() }
         register("BentoBox", FillerConfig.checkBentoBox) { BentoBoxProtection() }
         MagicBlockHook.init()
+        CraftEngineHook.init()
     }
 
     /**

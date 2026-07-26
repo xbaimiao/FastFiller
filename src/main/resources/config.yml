@@ -12,6 +12,12 @@ enable-worlds:
   - 'world'
 
 # 创世斧物品外观
+# material 支持三种写法:
+#   STONE              原版材质
+#   head:<base64>      自定义头颅
+#   ce:<命名空间:物品id> CraftEngine 物品, 例如 ce:jzy:genesis_axe
+# 使用 CraftEngine 物品时, name / custom-model-data 留空即可保留 CE 物品自带的外观;
+# lore 留空则保留 CE 物品自带的描述, 但创世斧就不会显示容器里的方块数量了
 item:
   material: IRON_AXE
   name: "&8<&6*&5创世级&8> &7创世斧"

@@ -1,8 +1,7 @@
 package com.xbaimiao.fastfiller.core.config
 
-import com.xbaimiao.easylib.chat.colored
-import com.xbaimiao.easylib.xseries.XMaterial
 import com.xbaimiao.fastfiller.FastFiller
+import com.xbaimiao.fastfiller.core.item.ItemFactory
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 
@@ -18,21 +17,12 @@ object FillerConfig {
     var enableWorlds: List<String> = emptyList()
         private set
 
-    /** 创世斧材质 **/
-    var itemMaterial: XMaterial = XMaterial.IRON_AXE
+    /** 创世斧物品定义 **/
+    var itemSpec: ItemFactory.Spec = ItemFactory.Spec("IRON_AXE", null, emptyList(), null)
         private set
 
-    /** 创世斧展示名 **/
-    var itemName: String = ""
-        private set
-
-    /** 创世斧 CustomModelData **/
-    var itemCustomModelData: Int = -1
-        private set
-
-    /** 创世斧 lore, 支持 %item% %amount% **/
-    var itemLore: List<String> = emptyList()
-        private set
+    /** 创世斧 lore, 支持 %item% %amount%; 为空时不修改物品自带的 lore **/
+    val itemLore: List<String> get() = itemSpec.lore
 
     /** 单次操作的最大 x / z 跨度 **/
     var maxRangeX: Int = 500
@@ -96,12 +86,11 @@ object FillerConfig {
         enableWorlds = config.getStringList("enable-worlds")
 
         val item = config.getConfigurationSection("item")
-        itemMaterial = item?.getString("material")
-            ?.let { XMaterial.matchXMaterial(it).orElse(null) }
-            ?: XMaterial.IRON_AXE
-        itemName = item?.getString("name").colored()
-        itemCustomModelData = item.intOf("custom-model-data", "custom", -1)
-        itemLore = (item?.getStringList("lore") ?: emptyList()).colored()
+        itemSpec = if (item == null) {
+            ItemFactory.Spec("IRON_AXE", null, emptyList(), null)
+        } else {
+            ItemFactory.readSpec(item, "IRON_AXE")
+        }
 
         val range = config.stringOf("fill.max-range", "maxRange", "500x500").split("x")
         maxRangeX = range.getOrNull(0)?.trim()?.toIntOrNull() ?: 500
