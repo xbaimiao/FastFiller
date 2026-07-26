@@ -1,9 +1,17 @@
+# 操作确认菜单
 title: '&e操作确认'
-sort:
+
+# 字符排版, 一行 9 个字符, 有几行菜单就是几行
+layout:
   - '  A   B  '
+
+# 功能按钮对应的排版字符
 identifier:
+  # 确认
   confirm: 'A'
+  # 取消
   cancel: 'B'
+
 items:
   A:
     material: 'head:eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2UxZGViYzczMjMxZjhlZDRiNjlkNWMzYWMxYjFmMThmMzY1NmE4OTg4ZTIzZjJlMWJkYmM0ZTg1ZjZkNDZhIn19fQ=='

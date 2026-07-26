@@ -1,48 +1,50 @@
 package com.xbaimiao.fastfiller
 
 import com.xbaimiao.easylib.EasyPlugin
-import com.xbaimiao.easylib.chat.BuiltInConfiguration
-import com.xbaimiao.easylib.util.ShortUUID
 import com.xbaimiao.easylib.util.plugin
-import com.xbaimiao.fastfiller.api.PlayerFillerAPI
-import com.xbaimiao.fastfiller.api.impl.DefaultPlayerFillerAPI
-import com.xbaimiao.fastfiller.core.data.DataContainer
-import com.xbaimiao.fastfiller.core.data.MemoryDataContainer
-import com.xbaimiao.fastfiller.core.hook.Hook
-import com.xbaimiao.fastfiller.core.workload.WorkLoadPool
-import com.xbaimiao.fastfiller.ui.FillerUIManager
+import com.xbaimiao.fastfiller.api.FillerApi
+import com.xbaimiao.fastfiller.core.config.BlockNames
+import com.xbaimiao.fastfiller.core.config.FillerConfig
+import com.xbaimiao.fastfiller.core.fill.FillScheduler
+import com.xbaimiao.fastfiller.core.hook.Hooks
+import com.xbaimiao.fastfiller.core.item.FillerApiImpl
+import com.xbaimiao.fastfiller.core.session.SessionManager
+import com.xbaimiao.fastfiller.ui.FillerMenus
+import org.bukkit.configuration.file.FileConfiguration
 
 @Suppress("unused")
 class FastFiller : EasyPlugin() {
 
-    companion object {
-        val inst get() = plugin as FastFiller
-
-        val conf get() = inst.config
-
-
-        @JvmStatic
-        lateinit var workLoadPool: WorkLoadPool
-
-        @JvmStatic
-        lateinit var dataContainer: DataContainer
-
-        @JvmStatic
-        lateinit var api: PlayerFillerAPI
-
-    }
-
-    val itemI18n by enable { BuiltInConfiguration("itemi18n.yml") }
-
     override fun enable() {
         saveDefaultConfig()
-        FillerUIManager.init()
-        Hook.init()
-        workLoadPool = WorkLoadPool(6)
-        dataContainer = MemoryDataContainer()
-        api = DefaultPlayerFillerAPI()
-        Commands.init()
-        logger.info("${description.name} 插件启动成功 ${ShortUUID.randomShortUUID()}")
+        FillerConfig.load()
+        BlockNames.load()
+        api = FillerApiImpl()
+        Hooks.init()
+        FillerMenus.load()
+        FillScheduler.start()
+        FillerCommands.register()
+        logger.info("${description.name} v${description.version} 启动完成")
+    }
+
+    override fun disable() {
+        FillScheduler.stop()
+        SessionManager.clear()
+    }
+
+    companion object {
+
+        /** 插件实例 **/
+        val inst: FastFiller get() = plugin as FastFiller
+
+        /** config.yml **/
+        val conf: FileConfiguration get() = inst.config
+
+        /** 对外 API **/
+        @JvmStatic
+        lateinit var api: FillerApi
+            private set
+
     }
 
 }

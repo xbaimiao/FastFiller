@@ -1,3 +1,7 @@
+# 方块中文名映射, 用于创世斧 lore 上的 %item%
+# 容器为空时显示的名字
+empty-name: 空气
+
 itemi18n:
   GREEN_CONCRETE_POWDER: 绿色混凝土粉末
   FOX_SPAWN_EGG: 狐狸刷怪蛋

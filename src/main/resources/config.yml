@@ -1,18 +1,22 @@
+# PlayerFiller 配置文件
 # 授权网易服-生存领域使用
-# 授权网易服-生存领域使用
-# 授权网易服-生存领域使用
-# 授权网易服-生存领域使用
-# 授权网易服-生存领域使用
+#
+# 权限节点:
+#   playerfiller.use    基础使用权限
+#   playerfiller.admin  /playerfiller 命令权限
+#   playerfiller.vip    不受最大范围和冷却限制
+#   playerfiller.magic  允许使用魔术方块填充
 
-# 基础使用权限  playerfiller.use
-# 使用魔术方块填充的权限 playerfiller.magic
-# 不限制最大清理范围和冷却的权限 playerfiller.vip
+# 允许使用创世斧的世界
 enable-worlds:
   - 'world'
+
+# 创世斧物品外观
 item:
-  material: iron_axe
+  material: IRON_AXE
   name: "&8<&6*&5创世级&8> &7创世斧"
-  custom: 20001
+  custom-model-data: 20001
+  # %item% 容器内方块名  %amount% 容器内方块数量
   lore:
     - '&f功能:'
     - '&a◎&7 一键清除选点范围方块'
@@ -23,53 +27,82 @@ item:
     - ''
     - '&a◎&6 下蹲 + 右击 &7打开建造菜单'
     - '&f容器: %item% X %amount%'
-# 最大可清理范围
-maxRange: '500x500'
-# 使用冷却 单位秒
-cooldown: 120
 
-# 是否检测选点在领地内
-checkResidence: true
-# 是否检测Land插件
-checkLand: true
-# 是否检测PlotSquared
-checkPlotSquared: true
-# 是否检测BentoBox
-checkBentoBox: true
+# 填充相关
+fill:
+  # 单次操作的最大 x 与 z 跨度
+  max-range: '500x500'
+  # 使用冷却, 单位秒, 0 为不限制
+  cooldown: 120
+  # 每 tick 处理方块的时间上限, 单位毫秒
+  # 数值越大填充越快, 但对服务器 TPS 的影响也越大
+  max-millis-per-tick: 2.0
+  # 每 tick 最多处理的方块数
+  max-blocks-per-tick: 4096
 
-# 可以被清理的方块
-whiteListBlock:
-  - STONE
-  - REDSTONE_ORE
-  - IRON_ORE
-  - DIAMOND_ORE
-  - GOLD_ORE
-  - COPPER_ORE
-  - GRASS_BLOCK
-  - GRASS
-  - COAL_ORE
-  - DIRT
-  - GRAVEL
-  - ANDESITE
-  - LAPIS_ORE
-  - DIORITE
-  - GRANITE
-  - COBBLESTONE
-# 可放入容器的方块
-containerBlock:
-  - STONE
-  - REDSTONE_ORE
-  - IRON_ORE
-  - DIAMOND_ORE
-  - GOLD_ORE
-  - COPPER_ORE
-  - GRASS_BLOCK
-  - GRASS
-  - COAL_ORE
-  - DIRT
-  - GRAVEL
-  - ANDESITE
-  - LAPIS_ORE
-  - DIORITE
-  - GRANITE
-  - COBBLESTONE
+# 容器相关
+storage:
+  # 单把创世斧的方块储量上限, 0 为不限制
+  max-amount: 0
+
+# 保护插件检测, 未安装对应插件时该项无效
+protect:
+  # Residence 领地
+  residence: true
+  # land 领地
+  land: true
+  # PlotSquared 地皮
+  plot-squared: true
+  # BentoBox 岛屿
+  bento-box: true
+
+# 方块名单
+# 支持三种写法: ALL(全部方块)  STONE*(名字包含 STONE)  STONE(精确匹配)
+blocks:
+  # 可以被"清空方块"清理的方块, 箱子等容器方块始终不会被清理
+  clearable:
+    - STONE
+    - REDSTONE_ORE
+    - IRON_ORE
+    - DIAMOND_ORE
+    - GOLD_ORE
+    - COPPER_ORE
+    - GRASS_BLOCK
+    # 1.20.3+ 改名为 SHORT_GRASS, 这里写哪个都会被自动转换
+    - GRASS
+    - COAL_ORE
+    - DIRT
+    - GRAVEL
+    - ANDESITE
+    - LAPIS_ORE
+    - DIORITE
+    - GRANITE
+    - COBBLESTONE
+  # 可以放入创世斧容器的方块
+  storable:
+    - STONE
+    - REDSTONE_ORE
+    - IRON_ORE
+    - DIAMOND_ORE
+    - GOLD_ORE
+    - COPPER_ORE
+    - GRASS_BLOCK
+    - GRASS
+    - COAL_ORE
+    - DIRT
+    - GRAVEL
+    - ANDESITE
+    - LAPIS_ORE
+    - DIORITE
+    - GRANITE
+    - COBBLESTONE
+  # 填充时视为空位, 会被直接覆盖的方块
+  # 使用魔术方块填充时会额外覆盖 LAVA
+  replaceable:
+    - AIR
+    - CAVE_AIR
+    - VOID_AIR
+    - WATER
+  # "清除水源"按钮要清理的方块
+  water:
+    - WATER

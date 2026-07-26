@@ -1,12 +1,25 @@
 package com.xbaimiao.fastfiller.api
 
-import com.xbaimiao.fastfiller.api.Container
 import org.bukkit.inventory.ItemStack
 
+/**
+ * 一把创世斧
+ */
 interface FillerItem {
 
-    fun getItemStack(): ItemStack
+    /**
+     * 物品本体
+     */
+    val itemStack: ItemStack
 
-    fun getContainer(): Container
+    /**
+     * 物品内部的方块容器
+     */
+    val storage: FillerStorage
+
+    /**
+     * 刷新物品 lore 上的容器信息
+     */
+    fun refreshLore()
 
 }

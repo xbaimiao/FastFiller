@@ -3,61 +3,62 @@ val easylibVersion: String by project
 
 plugins {
     java
-    id("com.github.johnrengelman.shadow")
+    id("com.gradleup.shadow")
     id("com.xbaimiao.easylib")
     kotlin("jvm")
 }
 
 group = "com.xbaimiao.fastfiller"
-version = "1.0.6"
+version = "2.0.0"
+description = "玩家快速填充/清理方块工具"
+
+// easylib-gradle-plugin 的 generatePluginYml 会在 afterEvaluate 里覆盖 project.group,
+// tasks {} 中不要直接引用 project.group, 统一使用这个常量
+val basePackage = "com.xbaimiao.fastfiller"
 
 easylib {
     env {
-        mainClassName = "com.xbaimiao.fastfiller.FastFiller"
+        mainClassName = "$basePackage.FastFiller"
         pluginName = "PlayerFiller"
         kotlinVersion = ktVersion
-        pluginUpdateInfo = "增加检测开关和优化使用体验"
+        updateInfo = "支持 1.18.2 - 26.1.2, 重构物品存储与配置"
+        // 填充任务基于 Bukkit 全局调度器且会跨区块放置方块, 不支持 Folia
+        foliaSupported = false
+        authors.add("xbaimiao")
+        softDepend.add("Residence")
+        softDepend.add("PlotSquared")
+        softDepend.add("BentoBox")
+        softDepend.add("land")
+        softDepend.add("MagicBlock")
     }
     version = easylibVersion
 
-    library("de.tr7zw:item-nbt-api:2.15.0", false){
-        relocate("de.tr7zw.changeme.nbtapi", "${project.group}.shadow.itemnbtapi")
+    library("de.tr7zw:item-nbt-api:2.15.7", false) {
         repo("https://repo.codemc.org/repository/maven-public/")
     }
-//    library("redis.clients:jedis:5.0.1", true) {
-//        relocate("redis.clients.jedis", "${project.group}.shadow.redis")
-//    }
-//    // jedis需要
-//    library("org.apache.commons:commons-pool2:2.12.0", true){
-//        relocate("org.apache.commons.pool2", "${project.group}.shadow.pool2")
-//    }
+    relocate("de.tr7zw.changeme.nbtapi", "$basePackage.shadow.itemnbtapi", false)
 
-//    val cloudOrmlite = true
-//    library("com.j256.ormlite:ormlite-core:6.1", cloudOrmlite)
-//    library("com.j256.ormlite:ormlite-jdbc:6.1", cloudOrmlite)
-//    relocate("com.j256.ormlite", "${project.group}.shadow.ormlite", cloudOrmlite)
-//    library("com.zaxxer:HikariCP:4.0.3", true) {
-//        relocate("com.zaxxer.hikari", "${project.group}.shadow.hikari")
-//    }
+    relocate("com.xbaimiao.easylib", "$basePackage.easylib", false)
+    relocate("kotlin", "$basePackage.shadow.kotlin", true)
+    relocate("kotlinx", "$basePackage.shadow.kotlinx", true)
+}
 
-    relocate("com.xbaimiao.easylib", "${project.group}.easylib", false)
-    relocate("kotlin", "${project.group}.shadow.kotlin", true)
-    relocate("kotlinx", "${project.group}.shadow.kotlinx", true)
+kotlin {
+    jvmToolchain(17)
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     compileOnly(kotlin("stdlib-jdk8"))
-    compileOnly("public:res:1.0.0")
-//    compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     compileOnly("org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("public:res:1.0.0")
     compileOnly(fileTree("libs"))
 }
 
@@ -72,6 +73,7 @@ tasks {
         outputs.upToDateWhen { false }
     }
     shadowJar {
+        dependsOn("generatePluginYml")
         dependencies {
             easylib.library.forEach {
                 if (it.cloud) {
@@ -85,10 +87,9 @@ tasks {
             exclude(dependency("org.jetbrains.kotlinx:"))
         }
         archiveClassifier.set("")
-        easylib.getAllRelocate().forEach {
+        easylib.relocate.forEach {
             relocate(it.pattern, it.replacement)
         }
         minimize()
     }
-
 }
